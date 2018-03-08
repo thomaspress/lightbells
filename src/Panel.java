@@ -50,7 +50,7 @@ public class Panel extends JPanel implements KeyListener {
                 d.start();
                 break;
             case 53:
-                Thread f = new Thread(new AudioPlayer("HIP HOP SNIPPET_3.wav"));
+                Thread f = new Thread(new AudioPlayer("clock.wav"));
                 f.start();
                 break;
         }
