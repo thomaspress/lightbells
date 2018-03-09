@@ -1,21 +1,56 @@
 import javax.sound.sampled.*;
 
-//import javax.sound.midi.*;
+import javax.sound.midi.*;
 import java.io.*;
 
 
-public class AudioPlayer implements Runnable{
+public class AudioPlayer implements Runnable {
 
     private String link;
     private boolean checker = true;
 
-    AudioPlayer(String s){
+    AudioPlayer(String s) {
         this.link = s;
+        initMidi();
     }
 
-//    public void stopMe(){
-//        this.checker = false;
-//    }
+    private void initMidi() {
+        MidiDevice.Info[] md = MidiSystem.getMidiDeviceInfo();
+        MidiDevice.Info deviceName = null;
+        MidiDevice device = null;
+        for (MidiDevice.Info m : md) {
+            System.out.println(m);
+            if (m.getName().equals("Bus 1")) {
+                deviceName = m;
+                break;
+            }
+        }
+        try {
+            device = MidiSystem.getMidiDevice(deviceName);
+
+            if (!(device.isOpen())) {
+                try {
+                    device.open();
+                } catch (MidiUnavailableException e) {
+                    System.out.println("Midi in use by another application");
+                }
+            } else {
+                device.close();
+                System.out.println("closing midi device");
+                return;
+            }
+            System.out.println("Successfully loaded Bus 1");
+
+            Transmitter inTrans = device.getTransmitter();
+
+            Receiver midiReceiver = new MyReceiver();
+            inTrans.setReceiver(midiReceiver);
+
+        } catch (MidiUnavailableException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     @Override
     public void run() {
@@ -28,7 +63,6 @@ public class AudioPlayer implements Runnable{
                 clip.start();
                 Thread.sleep(clip.getMicrosecondLength() / 1000);
                 clip.stop();
-
 
             } catch (UnsupportedAudioFileException e) {
                 e.printStackTrace();
