@@ -7,54 +7,14 @@ import java.io.*;
 public class AudioPlayer implements Runnable {
 
     private String link;
-    private boolean checker = true;
 
     AudioPlayer(String s) {
         this.link = s;
-        initMidi();
-    }
-
-    private void initMidi() {
-        MidiDevice.Info[] md = MidiSystem.getMidiDeviceInfo();
-        MidiDevice.Info deviceName = null;
-        MidiDevice device = null;
-        for (MidiDevice.Info m : md) {
-            System.out.println(m);
-            if (m.getName().equals("Bus 1")) {
-                deviceName = m;
-                break;
-            }
-        }
-        try {
-            device = MidiSystem.getMidiDevice(deviceName);
-
-            if (!(device.isOpen())) {
-                try {
-                    device.open();
-                } catch (MidiUnavailableException e) {
-                    System.out.println("Midi in use by another application");
-                }
-            } else {
-                device.close();
-                System.out.println("closing midi device");
-                return;
-            }
-            System.out.println("Successfully loaded Bus 1");
-
-            Transmitter inTrans = device.getTransmitter();
-
-            Receiver midiReceiver = new MyReceiver();
-            inTrans.setReceiver(midiReceiver);
-
-        } catch (MidiUnavailableException e) {
-            e.printStackTrace();
-        }
-
     }
 
     @Override
     public void run() {
-        while (checker) {
+
             try {
                 File url = new File(link);
                 AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
@@ -77,9 +37,6 @@ public class AudioPlayer implements Runnable {
                 e.printStackTrace();
             }
         }
-        checker = true;
     }
 
-
-}
 
