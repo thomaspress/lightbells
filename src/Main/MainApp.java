@@ -1,9 +1,8 @@
+package Main;
+
 import javax.sound.midi.*;
 
 public class MainApp {
-
-    private MyReceiver thisReceiver;
-    private int midiNum;
 
     public static void main(String[] args) {
         MainApp m = new MainApp();
@@ -11,11 +10,7 @@ public class MainApp {
     }
 
     private void runApp(){
-
         initMidi();
-
-//        AudioPlayer a = new AudioPlayer("clock.wav");
-//        a.run();
     }
 
 
@@ -47,9 +42,9 @@ public class MainApp {
             System.out.println("Successfully loaded Bus 1");
 
             Transmitter inTrans = device.getTransmitter();
-            Receiver midiReceiver = new MyReceiver();
+            Receiver midiReceiver = new MIDIReceiver();
             inTrans.setReceiver(midiReceiver);
-            MyReceiver mR = (MyReceiver)midiReceiver;
+            MIDIReceiver mR = (MIDIReceiver)midiReceiver;
 
         } catch (MidiUnavailableException e) {
             e.printStackTrace();

@@ -1,6 +1,6 @@
-import javax.sound.sampled.*;
+package Main;
 
-import javax.sound.midi.*;
+import javax.sound.sampled.*;
 import java.io.*;
 
 
