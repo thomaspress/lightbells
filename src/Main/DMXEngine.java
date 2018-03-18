@@ -94,6 +94,10 @@ public class DMXEngine implements Runnable {
 		}
 	}
 
+//	private void checkUserInput() {
+//
+//	}
+
 	public void controlChannel(int channel) {
 //		Fade channel [channel] from 255 to 0 over 4s
 		System.out.println("controlling channel " + channel);
