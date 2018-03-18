@@ -1,8 +1,10 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="sound test:jar">
+  <artifact type="jar" name="sound_test:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/sound_test_jar</output-path>
     <root id="archive" name="sound test.jar">
       <element id="module-output" name="sound test" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/protobuf/protobuf-java/2.4.1/protobuf-java-2.4.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/ola/ola-java-client/0.0.1/ola-java-client-0.0.1.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>
