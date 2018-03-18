@@ -17,6 +17,8 @@ public class AudioPlayer implements Runnable {
 
         for (Mixer.Info m : ad) {
             System.out.println("Audio Device " + m.getName());
+
+            //This is where we choose which output device to use and lock to this one"
             if (m.getName().equals("Built-in Output")) {
                 deviceInfo = m;
                 break;
@@ -37,10 +39,7 @@ public class AudioPlayer implements Runnable {
 //            }
 //        }
         try {
-            SourceDataLine sourceDataLine = (SourceDataLine)deviceMixer.getLine(linesSource[0]);
-//            sourceDataLine.open();
-//            clip = (Clip)deviceMixer.getLine(linesSource[1]);
-//            clip.open();
+            clip = (Clip)deviceMixer.getLine(linesSource[1]);
         } catch (LineUnavailableException e) {
             e.printStackTrace();
         }
@@ -53,12 +52,11 @@ public class AudioPlayer implements Runnable {
 
             try {
                 File url = new File(link);
-//                System.out.println("link is " + url.getAbsolutePath());
                 AudioInputStream audioIn = AudioSystem.getAudioInputStream(this.getClass().getResource("/" + link));
 
 //                AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
-                Clip clip = AudioSystem.getClip();
-//                Clip clip = AudioSystem.getLine(thisLine);
+//                Clip clip = AudioSystem.getClip();
+
                 clip.open(audioIn);
                 clip.start();
                 Thread.sleep(clip.getMicrosecondLength() / 1000);
