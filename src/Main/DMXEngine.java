@@ -74,7 +74,9 @@ public class DMXEngine implements Runnable {
 
 		while (!stop) {
 			startTime = System.nanoTime();
-//			checkUserInput();
+//			if (checkUserInput().equals("q")){
+//				stop = true;
+//			}
 //			computeCurrentFrame();
 //			for (int i =0; i < 512 ; i++) {
 //				System.out.println("currentFrame is " + currentFrame[i]);
@@ -94,9 +96,7 @@ public class DMXEngine implements Runnable {
 		}
 	}
 
-//	private void checkUserInput() {
-//
-//	}
+
 
 	public void controlChannel(int channel) {
 //		Fade channel [channel] from 255 to 0 over 4s

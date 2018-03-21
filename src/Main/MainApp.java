@@ -7,6 +7,14 @@ public class MainApp {
     public static void main(String[] args) {
         MainApp m = new MainApp();
         m.runApp();
+        Thread thread = new Thread(new KeyListener());
+        thread.start();
+        while (!thread.isInterrupted()){
+//            System.out.println("running fine");
+            continue;
+        }
+        System.out.println("quitting");
+        return;
     }
 
     private void runApp(){
@@ -49,6 +57,13 @@ public class MainApp {
         } catch (MidiUnavailableException e) {
             e.printStackTrace();
         }
+    }
+
+    private String checkUserInput() {
+        String s = Keyboard.readInput();
+        if (s.equals("q")){
+            return "q";
+        } return null;
     }
 
 
