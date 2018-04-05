@@ -22,10 +22,10 @@ public class AudioPlayer implements Runnable {
 
         //        These lines print out available devices
         for (Mixer.Info m : ad) {
-            System.out.println("Audio Device " + m.getName());
+            System.out.println("Audio Device is " + m.getName() + " description is " + m.getDescription());
 
             //This is where we choose which output device to use and lock to this one"
-            if (m.getName().equals("Built-in Output")) {
+            if (m.getName().equals("ALSA [default]")) {
                 deviceInfo = m;
                 break;
             } else deviceInfo = ad[0];

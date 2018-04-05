@@ -10,9 +10,10 @@ public class MIDIReceiver implements Receiver {
 
         try {
             Synthesizer synth = MidiSystem.getSynthesizer();
+            synth.open();
             this.rcvr = synth.getReceiver();
         } catch (MidiUnavailableException mue) {
-            mue.printStackTrace();
+            System.out.println("Error opening midi receiver " + mue);
         }
 
         try {
@@ -28,56 +29,56 @@ public class MIDIReceiver implements Receiver {
     public void send(MidiMessage message, long timeStamp) {
         byte[] b = message.getMessage();
         if ((b[0] != (byte) 254) && (b[2] > 64)) {
-//            String output = "";
-//            for (byte bt : b) {
-//                output += "|" + bt;
-//            }
-//            System.out.println(output);
+            String output = "";
+            for (byte bt : b) {
+                output += "|" + bt;
+            }
+            System.out.println(output);
             switch (b[1]) {
-                case 67:
-                    System.out.println("G3 pressed");
+                case 1:
+                    System.out.println("C#2 pressed");
                     Thread t1 = new Thread(new AudioPlayer("clock.wav"));
                     t1.start();
                     lights.controlChannel(1);
                     break;
-                case 68:
-                    System.out.println("G#3 pressed");
+                case 2:
+                    System.out.println("D2 pressed");
                     Thread t2 = new Thread(new AudioPlayer("bell.wav"));
                     t2.start();
                     lights.controlChannel(2);
                     break;
-                case 69:
-                    System.out.println("A3 pressed");
+                case 3:
+                    System.out.println("D#2 pressed");
                     Thread t3 = new Thread(new AudioPlayer("clock.wav"));
                     t3.start();
                     lights.controlChannel(3);
                     break;
-                case 70:
-                    System.out.println("A#3 pressed");
+                case 4:
+                    System.out.println("E2 pressed");
                     Thread t4 = new Thread(new AudioPlayer("bell.wav"));
                     t4.start();
                     lights.controlChannel(4);
                     break;
-                case 71:
-                    System.out.println("B3 pressed");
+                case 5:
+                    System.out.println("F2 pressed");
                     Thread t5 = new Thread(new AudioPlayer("clock.wav"));
                     t5.start();
                     lights.controlChannel(5);
                     break;
-                case 72:
-                    System.out.println("C4 pressed");
+                case 6:
+                    System.out.println("F#2 pressed");
                     Thread t6 = new Thread(new AudioPlayer("bell.wav"));
                     t6.start();
                     lights.controlChannel(6);
                     break;
-                case 73:
-                    System.out.println("C#4 pressed");
+                case 7:
+                    System.out.println("G2 pressed");
                     Thread t7 = new Thread(new AudioPlayer("clock.wav"));
                     t7.start();
                     lights.controlChannel(7);
                     break;
-                case 74:
-                    System.out.println("D4 pressed");
+                case 8:
+                    System.out.println("G#2 pressed");
                     Thread t8 = new Thread(new AudioPlayer("bell.wav"));
                     t8.start();
                     lights.controlChannel(8);

@@ -27,8 +27,8 @@ public class MainApp {
         MidiDevice.Info deviceName = null;
 
         for (MidiDevice.Info m : md) {
-            System.out.println(m);
-            if (m.getName().equals("Bus 1")) {
+            System.out.println(m.getDescription());
+            if (m.getDescription().equals("Teensy MIDI, USB MIDI, Teensy MIDI")) {
                 deviceName = m;
                 break;
             }
@@ -39,6 +39,7 @@ public class MainApp {
             if (!(device.isOpen())) {
                 try {
                     device.open();
+                    System.out.println("Opening midi in device");
                 } catch (MidiUnavailableException e) {
                     System.out.println("Midi in use by another application");
                 }
@@ -47,7 +48,7 @@ public class MainApp {
                 System.out.println("closing midi device");
                 return;
             }
-            System.out.println("Successfully loaded Bus 1");
+            System.out.println("Successfully loaded Midi Input Device");
 
             Transmitter inTrans = device.getTransmitter();
             Receiver midiReceiver = new MIDIReceiver();
